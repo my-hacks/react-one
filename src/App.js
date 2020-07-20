@@ -4,16 +4,22 @@ import axios from "axios";
 import "./styles.css";
 
 function App() {
-  const { data, setData } = useState([]);
+  const { repositories, setRepositories } = useState([]);
 
   useEffect(() => {
+    handleAddRepository();
     handleAddRepository();
   }, []);
 
   async function handleAddRepository() {
     //TODO: change for POST method
-    const response = await axios.get("/projects/").then((res) => res.json());
-    setData(...data, response.data);
+    const response = await axios.post("http://localhost:3333/repositories", {
+      url: "github.com/emersonjds",
+      title: "React JS",
+      techs: ["React JS", "React Native"],
+    });
+
+    const { data } = response.data;
     console.log(data);
   }
 
