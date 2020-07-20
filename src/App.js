@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import "./styles.css";
 
 function App() {
+  const { data, setData } = useState([]);
+
+  useEffect(() => {
+    handleAddRepository();
+  }, []);
+
   async function handleAddRepository() {
-    // TODO
+    const response = await axios.get("/projects/").then((res) => res.json());
+    setData(...data, response.data);
+    console.log(data);
   }
 
   async function handleRemoveRepository(id) {
@@ -16,10 +25,7 @@ function App() {
       <ul data-testid="repository-list">
         <li>
           Repositório 1
-
-          <button onClick={() => handleRemoveRepository(1)}>
-            Remover
-          </button>
+          <button onClick={() => handleRemoveRepository(1)}>Remover</button>
         </li>
       </ul>
 

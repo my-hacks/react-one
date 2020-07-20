@@ -18,12 +18,12 @@ div li {
   align-items: center;
 }
 
-div li + li {
+div li+li {
   margin-top: 15px;
 }
 
 button {
-  background: #7159c1;
+  background: #cecece;
   color: #fff;
   border: 0;
   padding: 10px 15px;
