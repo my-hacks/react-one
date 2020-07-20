@@ -11,6 +11,7 @@ function App() {
   }, []);
 
   async function handleAddRepository() {
+    //TODO: change for POST method
     const response = await axios.get("/projects/").then((res) => res.json());
     setData(...data, response.data);
     console.log(data);
