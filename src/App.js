@@ -4,13 +4,12 @@ import api from "./services/api";
 import "./styles.css";
 
 function App() {
-  const [projects, setProjects] = useState([]);
+  const [repositories, setRepositories] = useState([]);
 
   useEffect(() => {
     // handleAddRepository();
     api.get("/repositories").then((response) => {
-      setProjects([...projects, response.data]);
-      // setRepositories([...repositories, response.data]);
+      setRepositories(response.data);
     });
   }, []);
 
@@ -23,8 +22,8 @@ function App() {
     });
 
     const { data } = response.data;
-    setProjects([...projects, data]);
-    console.log(projects);
+    setRepositories([...repositories, data]);
+    console.log(repositories);
   }
 
   async function handleRemoveRepository(id) {
@@ -34,11 +33,11 @@ function App() {
   return (
     <div>
       <ul data-testid="repository-list">
-        {projects &&
-          projects.map((project) => (
-            <li key={project.id}>
-              {project.title}
-              {project.id ? (
+        {repositories &&
+          repositories.map((repository) => (
+            <li key={repository.id}>
+              {repository.title}
+              {repository.id ? (
                 <button onClick={() => handleRemoveRepository(1)}>
                   Remover
                 </button>
