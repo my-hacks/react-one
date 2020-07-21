@@ -19,18 +19,17 @@ function App() {
   async function handleAddRepository() {
     //TODO: change for POST method
     const response = await api.post("/repositories", {
-      url: "github.com/emersonjds",
-      title: "Desafio ReactJS",
-      techs: ["React JS", "React Native"],
+      title: "Emerson",
+      url: "https://github.com/emersonjds",
+      techs: ["Node.js", "ReactJS"],
     });
 
-    const { data } = response.data;
-    setRepositories([...repositories, data]);
+    setRepositories([...repositories, response.data]);
   }
 
   async function handleRemoveRepository(id) {
-    await api.delete("/repositories/" + id);
-    getRepositories();
+    await api.delete(`/repositories/${id}`);
+    setRepositories(repositories.filter((repository) => repository.id !== id));
   }
 
   return (
@@ -39,7 +38,7 @@ function App() {
         {repositories &&
           repositories.map((repository) => {
             return (
-              <li key={repository.id}>
+              <p key={repository.id}>
                 {repository.title}
                 {repository.id ? (
                   <button onClick={() => handleRemoveRepository(repository.id)}>
@@ -48,7 +47,7 @@ function App() {
                 ) : (
                   ""
                 )}
-              </li>
+              </p>
             );
           })}
       </ul>
